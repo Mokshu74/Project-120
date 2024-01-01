@@ -1,0 +1,282 @@
+<html>
+<head>
+  <title>Real Time Image Identification game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.js"></script>
+  <script src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+  <body 
+    <hr>
+    <center>
+ <image src="data:image/jpeg;base64,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">
+   <h3>
+     VS.
+   </h3>
+   <image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsnrGScCBf4x3eexzC9vqEK-IOC6SeUA9GEq8t7A09Qg&usqp=CAU&ec=48665701">
+
+    <ol>
+      <div>
+      <div class="test_image_and_result col-xs-12">
+        <li class="col-sm-4 col-xs-12">
+          <b> Test Image -</b>
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRulE26I59kcnMIg79okqmKlHYjK0IQXQq9K-kJqOiCdw&usqp=CAU&ec=48665701" class="img-responsive">
+        </li>
+        <h5 class="col-sm-4 col-xs-12">
+          Output on <b> GOOGLE LENS</b>-
+          <span></span>
+        </h5>
+        <h5 class="col-sm-4 col-xs-12">
+          Ouput on <b>MobileNet Model</b>-
+          <span></span>
+        </h5>
+        <div class="mini_result" class="col-xs-12">
+          <h4>Results - </h4>
+          <hr>
+          <h4></h4>
+        </div>
+      </div>
+      <br>
+      <div>
+      <ol>
+      <div class="test_image_and_result col-xs-12">
+        <li class="col-sm-4 col-xs-12">
+          <b> Test Image -</b>
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUZ9_5VX35XGw6Eo_lwuLhkBZPQlHWnnGUr-7fXeccRA&usqp=CAU&ec=48665701" class="img-responsive">
+        </li>
+        <h5 class="col-sm-4 col-xs-12">
+          Output on <b> GOOGLE LENS</b>-
+          <span></span>
+        </h5>
+        <h5 class="col-sm-4 col-xs-12">
+          Ouput on <b>MobileNet Model</b>-
+          <span></span>
+        </h5>
+        <div class="mini_result" class="col-xs-12">
+          <h4>Results - </h4>
+          <hr>
+          <h4></h4>
+        </div>
+      </div>
+      <br>
+    <div>
+        
+        <ol>
+      <div class="test_image_and_result col-xs-12">
+        <li class="col-sm-4 col-xs-12">
+          <b> Test Image -</b>
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBZBDTtAxUnZmD-2EzXbpWPzzLhXoJxmdRWrQ37OPvpg&usqp=CAU&ec=48665701" class="img-responsive">
+        </li>
+        <h5 class="col-sm-4 col-xs-12">
+          Output on <b> GOOGLE LENS</b>-
+          <span></span>
+        </h5>
+        <h5 class="col-sm-4 col-xs-12">
+          Ouput on <b>MobileNet Model</b>-
+          <span></span>
+        </h5>
+        <div class="mini_result" class="col-xs-12">
+          <h4>Results - </h4>
+          <hr>
+          <h4></h4>
+        </div>
+      </div>
+      <br>
+    
+         <div> 
+          <ol>
+      <div class="test_image_and_result col-xs-12">
+        <li class="col-sm-4 col-xs-12">
+          <b> Test Image -</b>
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkYnW6Vm19U60vjLvwWLUVh75GrfJb5pZsXjZKQT5uAZwUca5gMv23x-oaHzFLLvp1HSk5dwEg_I0&usqp=CAU&ec=48665701" class="img-responsive">
+        </li>
+        <h5 class="col-sm-4 col-xs-12">
+          Output on <b> GOOGLE LENS</b>-
+          <span></span>
+        </h5>
+        <h5 class="col-sm-4 col-xs-12">
+          Ouput on <b>MobileNet Model</b>-
+          <span></span>
+        </h5>
+        <div class="mini_result" class="col-xs-12">
+          <h4>Results - </h4>
+          <hr>
+          <h4></h4>
+        </div>
+      </div>
+      <br>
+    
+           <div> 
+            <ol>
+      <div class="test_image_and_result col-xs-12">
+        <li class="col-sm-4 col-xs-12">
+          <b> Test Image -</b>
+          <img src="https://www.google.com/imgres?imgurl=https%3A%2F%2Fmedia.cnn.com%2Fapi%2Fv1%2Fimages%2Fstellar%2Fprod%2F210726171056-best-water-bottles-healthy-human.jpg%3Fq%3Dw_4032%2Ch_2268%2Cx_0%2Cy_0%2Cc_fill&tbnid=fAG3kQnHkQ1SWM&vet=10CBoQMyh0ahcKEwig8L_stp3-AhUAAAAAHQAAAAAQBQ..i&imgrefurl=https%3A%2F%2Fwww.cnn.com%2Fcnn-underscored%2Freviews%2Fbest-water-bottle&docid=oOhZeh3FO_TeoM&w=4032&h=2268&q=water%20bottle&safe=active&ved=0CBoQMyh0ahcKEwig8L_stp3-AhUAAAAAHQAAAAAQBQ" class="img-responsive">
+        </li>
+        <h5 class="col-sm-4 col-xs-12">
+          Output on <b> GOOGLE LENS</b>-
+          <span></span>
+        </h5>
+        <h5 class="col-sm-4 col-xs-12">
+          Ouput on <b>MobileNet Model</b>-
+          <span></span>
+        </h5>
+        <div class="mini_result" class="col-xs-12">
+          <h4>Results - </h4>
+          <hr>
+          <h4></h4>
+        </div>
+      </div>
+      <br>
+    
+             <div> 
+              <ol>
+      <div class="test_image_and_result col-xs-12">
+        <li class="col-sm-4 col-xs-12">
+          <b> Test Image -</b>
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0wnel95etVu33Qra8EdVut8zTJxiAVTZFJeCVvsfQ-g&usqp=CAU&ec=48665701" class="img-responsive">
+        </li>
+        <h5 class="col-sm-4 col-xs-12">
+          Output on <b> GOOGLE LENS</b>-
+          <span></span>
+        </h5>
+        <h5 class="col-sm-4 col-xs-12">
+          Ouput on <b>MobileNet Model</b>-
+          <span></span>
+        </h5>
+        <div class="mini_result" class="col-xs-12">
+          <h4>Results - </h4>
+          <hr>
+          <h4></h4>
+        </div>
+      </div>
+      <br>
+    
+                
+                <ol>
+      <div class="test_image_and_result col-xs-12">
+        <li class="col-sm-4 col-xs-12">
+          <b> Test Image -</b>
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjjNURcZPFIWhSnUzIEx27U_s6R5P8JaL0YCWRuO_RWg&usqp=CAU&ec=48665701" class="img-responsive">
+        </li>
+        <h5 class="col-sm-4 col-xs-12">
+          Output on <b> GOOGLE LENS</b>-
+          <span></span>
+        </h5>
+        <h5 class="col-sm-4 col-xs-12">
+          Ouput on <b>MobileNet Model</b>-
+          <span></span>
+        </h5>
+        <div class="mini_result" class="col-xs-12">
+          <h4>Results - </h4>
+          <hr>
+          <h4></h4>
+        </div>
+      </div>
+      <br>
+    <hr>
+                  <div>
+                    <div>
+                  
+                  <ol>
+      <div class="test_image_and_result col-xs-12">
+        <li class="col-sm-4 col-xs-12">
+          <b> Test Image -</b>
+          <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHCBUSERgSEhIYGRgYERgYGBgYGBgYGBgYGBgZGhoYGBkcIS4lHB4rIRgZJjgnKy8xNTU1GiQ7QDs0Py40NTEBDAwMEA8QGhISHjErISs0MTQ0MTQ0NDQxNDQ0NDQ0MTQ0NDQ0NDQ0NDQ0MTQ0NDE0NDQ0MTQ0NDQ0NDQ0NDE0NP/AABEIALcBEwMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAAAQUCBAYDB//EAEAQAAIBAgQDBgIIAwcEAwAAAAECAAMRBBIhMQVBUQYTImFxkTKBFEJSYqGxwdEjM3KCkqLC4fDxRFOTswcWJP/EABgBAQEBAQEAAAAAAAAAAAAAAAABAgME/8QAHhEBAQEBAAMBAQEBAAAAAAAAAAECERIhMQNxQVH/2gAMAwEAAhEDEQA/APrcREIRESBERARJkQBiIgREmRAREQIiTIgIMRAREQIiIgJEkiRAREQIiTECJMRASj45xLB94mDxeV3dQ6UmXOWsxCkKNb3ViPQy9nLYXjHD8Y7V0pio6HIai07uMrHKucbg6kC/OS1rM9tPjZwwyItJkK6Z2R1sg0AVjy/acLxCi71WfOQhfKArG7KTYX6nTnedLxd6Z7x6K92xBCXDIb2tmI+t1nL8NwairYkOV8ehJynYG1zrv7CZk67Z/wCrylSyqFUaAWET0idx9WiJEw85EmRIJiIgJEmRAREQIiTIgIiIVEmIgREmIRERECIMmIERFogJEmRARJkQEmIgVvH+M0cDQNfEEhM6poLkljbQc+Z9AZUYjF4YYfPTwhCul0HdKosw8LZL3A1va1+oE2eJdocL9L+gVU7ypkVwmQOLnMdjoGAGa/QiVPG62HZlprQyhLliUFvcXI572mdVvMcxxuglRFSmwUC7EH4QRoND8JFz7zx4PSUU7qN9L3vmA21/3zmnxXDhqjVc4K5gFXmQNAua9zqb/PyEuqNMKoVRYAWA6S5nt2+RneJt0sEzKGA39InVH0qJWDiLp/OoOo+2n8ZP8ID/AOC3nNvC4xKoJp1FYA2OUg2PRrag+RnN52xJkAxAmIiBEmJEBERAREiAiTIhSIiAiIgREmIERJkQhIkxAiJMiAiDEBMalQIpdiAqqWYnYAC5J+UylN2m7RYfh9NHxJOV6mQWGY/CSTbmBbX1gV/DO0WCxyfSEol7XDMaa3UrY5SzWJ3HlqNpz3Ea9Nu8qKmQtfIcuUjkDcaG2hOpG86HieKw60TkwmUvov8ADpg66lrA32vyvfecZx2lTdAiMEGpbQAAja6nQH8dJj7XbMU/D8Ei1QoKvbxeEABcvOy6bkaeY6To6SFmCjcm0q+DU1CXUDfLmve4XTQnkDcfKdDwqhmYta4A89z6G865nprS1pqygDKdB5H/ACSZh9HHX/2RNsurFdT5GeWIwNOoczoCwFg6+Fx/TUXxL8jPCSrEbGZuWPFP0arT/l1sw+zVGbToHWzD1bNMxxFk/m0nX7y/xE+RUZvmVAkpiSN9Z6pWU+Uz41OPTD4pKi5kdWF7XUhgD0JHOe4mhVwaVDmKjNsHUlXHkHWxHyMwFCoh/h1cw+zUF/kHWxHq2aRFlImgMe6fzKbL95fGnyKjN8yoE2aOJSoLowI6ggj0uIHtERCESIgIiIUiIgIiBARBiAkTyxWLSkhqVHVEUasxsBOTx/brDBHKVgMlgVA/jMW1XIjbA9dRbmssnUdbUrKnxH0G5PoBrOUxP/yLgqdTu2NS2YhnyDKvK9r5iPRZ8w492vxGMdqVPNTQkgopOZhteq51b028jvNXBJQwwFSs2ZybBB8RJ5AfPebmZUtfdeG8YTEMe7RwmmV2AVX/AKQTmt0JAB9r2c+ZdhBUxdbPWBWlTIqIiXCI4ItmOzMRr5ZTbcmfRnxSLu49/wBJnU5Vnt7RNQcRp3tn/AwnEabGwf3FhMjcnN4jtFhKuKqYF6Zq1KQDMmQONlYkE6ArmUXvvbnLvH41aFF69Q2WnTZ2P3VBJt1OkoMJxXA4pBjEolsy5jUFEhvDe4LgakG/PQ3krWYreN1qDVAooZFRdS1MAXOupF7C1t7bzieM00aqagcEZgqrm1I2AVr5rXJP9ozocTUpZXqABHN2G6MGJ0uDbMASN77Tm+HYVBVygh9M2mwta1wNCQf0mZOu2V5RQKoAFgBsJfYHDkUxcb631tr6KbSow1Iu4UC9z/zL7uOrZfUsv+UfnO8Sshh1/wC4P/I8Q3CGbXvd/U/rEqL2JEQiYkSZBKsRsZ6riG56zxiTicbS11O+n4iYPhUc5rDNa2ZSVcDpmXUek8IkuTxevd1E+CpmH2XFj6B12+YYzIY0rpUQr5/Ev94bDzYCYrWYc7+v7zNaw5i34iTxqcbFOsrC6sCORvcH0M9JonDoxLAWPMqbH59fQyRnXZgw6HQ/hofaRluxNVcYB8YK+v77fjNhXB2MDKIMQESJDuFBYkADcnYfOBN5W43iuV+6op3lXmo+FPN2+r6b+lxKziXGC9NqhqfR8KNGrtpUq/doLuAeTWJPIc5xOL4/XxZ+icMpNTpFsrODldy2mapU+oD0BLW9pvObWbri07Q8fpYd/wCIwxeKXZP+noG/MfWYdN9B8J1PB8S4lUxDmtiKpdj8lUclRRoqjy/Ey74hw/B8KT/9ZXE4ordcOCRQp9DUA1b0bfoN5xhFbGVCxHxG5sAo+QGigbAbCd8+OZ1i90VOIkHLTAufL9Ze9nuzIdlrVGLZgDqNR1UA/n0tab/BOzSU7Fhmb8P9Z1+Gw1pw3vt9N5zxuYQ5UFNPCg2UaD1PU+Z1nvMEW09ERmNlBJ8pzbYT1w+GaobKL66npLLC8I51P7o/Uy1p01UWUWHlHDqm43xrC4XusPijpXzKqle8DZcujLY3uWAHUyq40MKlAU0w+QOwGU0nRQianwkWA2XawzTarcS4bjKzo6pUq4eoyXyMzoytYlWUFlW432uJTcRbDVMSRTNgihF8TqSRcsVuQbXOW33JNVrM/qi4/SR6a06dQAHxWzEppoNL+HmNJ4cIQZMwG5tmvcsBtr7j5TV4zRvWNTOWAOUC9mPLcbknTrqNZcUUCqFAsBsJcz26/Is+F4fNdjsNAfFv6qDLNMIWUqlQaj7bNb+yRNfC4YqgGbKbXPjyG59U/WbaYNy6MzeFTfVrk/MKJ1ZrcoUcqhegtJnrErL3iYxAyiIgTEiTIEREBERATNapHn6zCJOD2FUHfT8RIFIbrp/SfzG1/WeJiTxTjYV3XmGHsfx3PtMlxq7OCp8/35/Ka3fHnr6zxxnEadJDUquEUczqPQDcnyF5PGpYtc45G/5z5d2n7ZV+97s0gmVx4GYMbXtlsh+Nhz3XNYC+ra3H+2j1b08IDTTYvs7DyH1Plr5zW4PxrAcPpCuQ2JxZFwMrKlK/LO4tfqwudSBpO2fzsndRyuu+o3cPwPE45vpHEKnc0UHwmyBEtsq7IugHXa99Zoca7aUsOhwnCUsLZTWtvbS9NTsfvH5DnKHi/HcbxaplqPZL3Wmnhpr5kH4j5tc9JecB7LqlmazN15A+Ul1J9WZtUXCuzz1m7ysSSxzEkksxO5N/zM7bh/CUpgBVsP8Ae5lph8IF5S3wvC3fULYdW09hznHWrpuSRW0aAE3sPhHf4VPry95d4bhSJbN4j57e03wLbScTqqw/BwLZ2v5Db3llTpKosqgDymcSiRNXiXEKeFotXrsFRbZmOwzMFH4kTalLx44KuDg8Y6HMgqZHcoSoYgNcEcwecEVqrwyktTEUCil1zsaTMveEXI+E2JuT82M5001FBnFTMStyc2dGc8yrXGrHlaW3GKGHWnRw+HqEoTcKtQ2CUx4QttvEUsB9luk5rtJgyUVFa5JzG4XPYcr2s2uoBG43mPdrrmKrh2EC1MreIi7X3sQRYn9jzW86TB0s7gctzy0HnY/lKjhVJQmYDUkgna+UkadB+86PhVFiC6sVOwsyg+zDWdczkbqxSi5+GoT5Z0I9is2sBhnQsXO5FgDoPlYC81amGqldNTyLBPzU3llhkKooY3IGpJvr6zbFekREI9YiICIiBlExiBnEiJBMREBIvEgmAJkEzS4pxSlhqfeVqgUcvtMeirux9J88472uq4i6Ur0qXM38bjzI2HkPczecXXxnW5n66ntB2upYa9On/Eq7ZQfCp++w/IfhPnXFuKPXbvMRUzH6q7Ko6KuwlXicctPRd548P4bXxrkIPCPidjlRB1dzoPTc8hOsmc/1xt1thWx5bw0xf8p1vZnsHUrFauLJRNwmzt6j6g/H03ljwXB4PAWZB9IrD69rIh+5fb11PmNpvYnjFarpmyL9lNPc7mc9btdc/nJ9XPF8Lg0wv0cKlPLqiKA1m6nnrzJ1M5Cmzob06jL5E5h+OoHoRNsU5DUROFz114uuz/aU0zlr0s92GV0sSP6gbED0zGd3SxqNbUgnkQR+c+X4bhlSof4ak+Z29523CqDpSFOqwa22lxboesnLGNZdGrX1GsSqVCNUYj0Nx7HYelp6pi3XcBh5aH2P7mGOLCTNWnjkY2JynowIPsZsq1xcawiROYxHA8DisSmPFS9UJlSotW4sAR4VJIBAJ2HMnedHXpB0ZCSMyFbqbMAwtdTyM4z/AOq0eGYOqaDkgXdc6I7mo1lpqHI0uxVRpbXa5JkrU408XQFXEVGFQuqvkQsFcEJoxtb7ZcaW2E5PidJzXOdvBogsWI3tYZifrEmxB38pfNhDSpEowzKuh+Ek9Sw0Jv8AaBlDw7DMXHeMSyWa12O9xc3J89ukzJ2u2Vth6QRQijQCwnR4eg60wova2xQONd9nMqMDSLVAANtdidvIAy5Be/wD1C1EP4JO8K9KSVM62BVb+IgFR6ZSZazS4e7sG7wEC9lvvb10v7TdlYpERA9YkRCJkREKmJEQJmUxmUCYkWnlXrBELEE2Gyi7E9AOZkGbNOS4/wBskpXp4cCpU2J+onqfrf8AE5nj/aaribqCaVL7A+Nh98/pOVxGOCjKn6aeZnbP5/7px1+n+ZbnEca1SoateoXfqdgOijkPSU2MxjNoNL7enW3SYoHqN4dTffkPQH8z7S+4ZwYL4m1bqf8Af4xr9Oesmfzt91U8P4OznM/+p/adXh8McgT6q7KNFHnba/nvNmhhgJu0KBY5UUk9ALzjbb9ds5ka9OiBPdE6S8wfZ921qHKOg1b9hL3C8Pp0vgQX6nU+8ca65rB8GqVNSMg6tv8AIS7wvBKdPVhnPnt7S0kQnRVAFgLRaIgLSc556+siJOAwBFiNOh1E8xTK603ZfQ3Hsdh5C0zMi0cTkQeJVafxKrja6kKxP9LkAf3yfKU3HeLDFPTw603UI/e1SyFVuotTS5GpzMH0+wNdZdHXQ6+us8nw4OpUH52NvU3mbmp4uN7SIxprTU2u9zuDZeWhHMj2mhgcP3a7k3NyTOsxXCO9qkkFECAKQQSW53HzPsJ4Hs6w2qD5qf3lznntuXk41+FUXsXC3B01Vjt0K6iWD16qjwI17/fI9mX9ZZYOh3aKnQa+Z5me00lrFCbC+9tbdZlExlQiIge0REIREQpERATITGeGPx6UEL1GsosNephHlxfi1PC0+8qNboBux6AT51xriz16veVsUlOghRwqPd9fEq5QfFUsOfhX139O1NRcXimfCl66hAGqN4KC9QXNrKOg1NzKnCcOohg9VPpL8gAadFNSbBbXYXJ+L2ElTtqj4pVaoDXpqe6ZyqFr32vrtfpcaXHymOA4S9SxfRenMzs6lGpXYd5qALKiCyKLg2VRyuB7CW+A7OVGHwhB1fQ+281dWmcSOewPDlpiwEt8HgXqG1NC3psPU7CdRhOz1NNXJc9Nl9hvLdECjKoAA5AWEy2oMF2cA1qt/ZX9Wl5h8OlMZUUKPL9TznrEqEiIgJERCkRIgTEiJBMSIgTIvEiAMREqEREDGIkQERED3iREIREiFTEiIEym43wRsUQDVAUH4WQOtv6T8Vz1uNBpzlzEDnT2VRrd5WdwBotlVR/So8K/ITew/Z/Dp9Qt/UT+QsJaRAxpUlQWRQo+6APymcRAREQEiIgIkRASJMiFIiRAmREQJkREIREQERMYGUxiICREQESIge8iIhCJEQqYkRAmJEQJiIgTEiIExIiBMSIgIiRAREiFIiICImMDKJjEIyiYxAREiBMiJECZERAREQPaREQhERAiIiFIiIExEQEREBERAREQEiIgIiIUmMRAREQEREIiIiAiIgRERAREQERED//Z" class="img-responsive">
+        </li>
+        <h5 class="col-sm-4 col-xs-12">
+          Output on <b> GOOGLE LENS</b>-
+          <span></span>
+        </h5>
+        <h5 class="col-sm-4 col-xs-12">
+          Ouput on <b>MobileNet Model</b>-
+          <span></span>
+        </h5>
+        <div class="mini_result" class="col-xs-12">
+          <h4>Results - </h4>
+          <hr>
+          <h4></h4>
+        </div>
+      </div>
+      <br>
+    
+              <ol>
+      <div class="test_image_and_result col-xs-12">
+        <li class="col-sm-4 col-xs-12">
+          <b> Test Image -</b>
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTP8GiMvfdH5ZaaVZmO5c6Iaf0CXrPF_VmOehAeRDD3Pg&usqp=CAU&ec=48665701" class="img-responsive">
+        </li>
+        <h5 class="col-sm-4 col-xs-12">
+          Output on <b> GOOGLE LENS</b>-
+          <span></span>
+        </h5>
+        <h5 class="col-sm-4 col-xs-12">
+          Ouput on <b>MobileNet Model</b>-
+          <span></span>
+        </h5>
+        <div class="mini_result" class="col-xs-12">
+          <h4>Results - </h4>
+          <hr>
+          <h4></h4>
+        </div>
+      </div>
+      <br>
+    
+                <ol>
+      <div class="test_image_and_result col-xs-12">
+        <li class="col-sm-4 col-xs-12">
+          <b> Test Image -</b>
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGtYqTXbQJ-hI1p1H9gR5qMpgPpu4KwNk23tMQjHeV1w&usqp=CAU&ec=48665701" class="img-responsive">
+        </li>
+        <h5 class="col-sm-4 col-xs-12">
+          Output on <b> GOOGLE LENS</b>-
+          <span></span>
+        </h5>
+        <h5 class="col-sm-4 col-xs-12">
+          Ouput on <b>MobileNet Model</b>-
+          <span></span>
+        </h5>
+        <div class="mini_result" class="col-xs-12">
+          <h4>Results - </h4>
+          <hr>
+          <h4></h4>
+        </div>
+      </div>
+      <br>
+     <ol>
+      <div class="test_image_and_result col-xs-12">
+        <li class="col-sm-4 col-xs-12">
+          <b> Test Image -</b>
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw1jLto8c5Ri7A8vKIvU7fvZ6PVEJzH-rdLjX5drVjF4Q1HszXlli4MzsBhUTZYyki6L-ld8g14oE&usqp=CAU&ec=48665701" class="img-responsive">
+        </li>
+        <h5 class="col-sm-4 col-xs-12">
+          Output on <b> GOOGLE LENS</b>-
+          <span></span>
+        </h5>
+        <h5 class="col-sm-4 col-xs-12">
+          Ouput on <b>MobileNet Model</b>-
+          <span></span>
+        </h5>
+        <div class="mini_result" class="col-xs-12">
+          <h4>Results - </h4>
+          <hr>
+          <h4></h4>
+        </div>
+      </div>
+      <br>
+    <h5>
+      I have tested 10 images and out of the google len got
+         
+    
+           </center>
+       </body>
+                  </html>
+      
+          
+        
+    
